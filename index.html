@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ariel Bukowski</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --plum:#3a1f2b;
+    --plum-soft:#6b4654;
+    --cream:#fbf3ea;
+    --coral:#e8826b;
+    --thread:#e8826b;
+    --line:rgba(58,31,43,.16);
+    --sew-x:50%;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--cream);color:var(--plum);
+    font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+
+  /* ===== TYPE ===== */
+  .serif{font-family:'Cormorant Garamond',serif;font-weight:300;letter-spacing:-.01em}
+  .script{font-family:'Allura',cursive;font-weight:400}
+  .eyebrow{font-family:'Inter',sans-serif;font-weight:500;text-transform:uppercase;
+    letter-spacing:.24em;font-size:11px;color:var(--plum-soft)}
+  .body{font-size:16px;line-height:1.75;color:var(--plum-soft);font-weight:400;text-wrap:pretty}
+
+  /* ===== LAYOUT ===== */
+  .wrap{max-width:1120px;margin:0 auto;padding:0 64px;position:relative;z-index:2}
+  @media (max-width:780px){.wrap{padding:0 24px}}
+
+  /* ===== NAV ===== */
+  .nav{position:absolute;top:0;left:0;right:0;z-index:10;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:24px 64px;color:#fff}
+  .nav .mark{font-family:'Allura',cursive;font-size:30px;line-height:1}
+  .nav ul{list-style:none;display:flex;gap:36px;margin:0;padding:0}
+  .nav a{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;opacity:.92}
+  .nav a:hover{opacity:.7}
+  @media (max-width:780px){.nav{padding:18px 22px}.nav ul{display:none}}
+
+  /* ===== HERO ===== */
+  .hero{position:relative;width:100%;aspect-ratio:1400/350;overflow:hidden;
+    background:url('assets/banner.jpg') center/cover no-repeat;
+    background-color:#e94c5a}
+  .hero::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(58,31,43,.04) 0%,transparent 30%,transparent 75%,rgba(58,31,43,.18) 100%);
+    pointer-events:none}
+  .hero-text{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    text-align:center;color:#fff;width:90%;max-width:900px;z-index:3}
+  .hero-name{font-family:'Allura',cursive;font-weight:400;
+    font-size:clamp(72px,9.5vw,148px);line-height:.95;letter-spacing:-.005em;
+    text-shadow:0 2px 28px rgba(58,31,43,.22);margin:0}
+  .hero-rule{width:54px;height:1px;background:rgba(255,255,255,.85);
+    margin:18px auto 14px}
+  .hero-tag{font-size:clamp(10px,.9vw,13px);letter-spacing:.36em;
+    font-weight:500;display:flex;justify-content:center;align-items:center;
+    gap:14px;flex-wrap:wrap}
+  .hero-tag .sep{width:3px;height:3px;border-radius:50%;background:#fff;opacity:.7}
+  @media (max-width:780px){
+    .hero-name{font-size:14vw}
+    .hero-tag{font-size:9px;letter-spacing:.28em;gap:10px}
+  }
+  .hero-meta{position:absolute;left:64px;bottom:30px;color:#fff;display:flex;gap:14px;
+    z-index:2;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;align-items:center}
+  .hero-meta .dot{width:5px;height:5px;border-radius:50%;background:#fff;opacity:.85}
+  .hero-meta-r{position:absolute;right:64px;bottom:30px;color:#fff;z-index:2;
+    font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;opacity:.9}
+  @media (max-width:780px){.hero-meta{left:22px;bottom:14px}.hero-meta-r{right:22px;bottom:14px}}
+
+  /* ===== SEAM (running stitch divider) ===== */
+  .seam{height:1px;border-top:1.4px dashed var(--line);margin:0}
+
+  /* ===== ABOUT ===== */
+  .about{padding:140px 0 100px}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:104px;align-items:end}
+  .about-img{aspect-ratio:4/5;background:linear-gradient(135deg,#f4a6a0 0%,#e8826b 55%,#d96382 100%);
+    position:relative;
+    /* fabric edge */
+    outline:1.4px dashed rgba(255,255,255,.55);outline-offset:-10px;
+  }
+  .about-img .ph{position:absolute;left:14px;bottom:14px;color:rgba(255,255,255,.85);
+    font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.1em}
+  .about-text h1{font-family:'Cormorant Garamond',serif;font-weight:300;line-height:1.05;
+    font-size:clamp(40px,5vw,68px);margin:0 0 32px;letter-spacing:-.012em;text-wrap:balance}
+  .about-text p{margin:0 0 18px}
+  .about-meta{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+    padding-top:28px;border-top:1.4px dashed var(--line)}
+  .about-meta .k{display:block;margin-bottom:6px}
+  .about-meta .v{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:var(--plum)}
+  @media (max-width:780px){.about-grid{grid-template-columns:1fr;gap:48px;align-items:start}}
+
+  /* ===== WORK ===== */
+  .work{padding:80px 0 120px}
+  .work-head{display:flex;align-items:baseline;justify-content:space-between;gap:24px;
+    padding:32px 0 56px;border-top:1.4px dashed var(--line)}
+  .work-head h2{margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;
+    font-size:clamp(32px,4vw,52px);letter-spacing:-.01em}
+  .work-head h2 em{font-style:italic;color:var(--coral)}
+  .work-head .count{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--coral)}
+
+  .work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:64px 96px}
+  @media (max-width:780px){.work-grid{grid-template-columns:1fr;gap:48px}}
+  .card{display:block;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+  .card:hover{transform:translateY(-2px)}
+  .card .thumb{aspect-ratio:5/4;position:relative;overflow:hidden;background:#eadfd6;
+    outline:1.4px dashed rgba(255,255,255,.55);outline-offset:-10px}
+  .card .thumb .ph-stripe{position:absolute;inset:0;
+    background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.12) 0 14px,transparent 14px 28px)}
+  .card .thumb .ph-label{position:absolute;left:18px;bottom:16px;font-family:ui-monospace,monospace;
+    font-size:10.5px;letter-spacing:.08em;color:rgba(255,255,255,.92);
+    background:rgba(58,31,43,.32);padding:5px 9px;backdrop-filter:blur(6px);z-index:2}
+  .card .meta{padding-top:22px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+  .card h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:26px;margin:0 0 4px;
+    color:var(--plum);letter-spacing:-.005em}
+  .card .tag{color:var(--plum-soft);font-size:13.5px}
+  .card .yr{color:var(--coral);font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:17px;flex-shrink:0;margin-top:6px}
+
+  .card .thumb.g1{background:linear-gradient(135deg,#f4a6a0,#e8826b 60%,#d96382)}
+  .card .thumb.g2{background:linear-gradient(160deg,#fbd1c4,#f4a6a0 55%,#e8826b)}
+  .card .thumb.g3{background:linear-gradient(210deg,#e8826b,#d96382 70%,#8a3a55)}
+  .card .thumb.g4{background:linear-gradient(45deg,#fbe4d6,#f4a6a0 90%)}
+
+  /* ===== CONTACT ===== */
+  .contact{padding:120px 0 100px;border-top:1.4px dashed var(--line)}
+  .contact-row{display:flex;align-items:end;justify-content:space-between;gap:48px;flex-wrap:wrap}
+  .contact h2{font-family:'Cormorant Garamond',serif;font-weight:300;
+    font-size:clamp(56px,7vw,108px);line-height:.95;margin:6px 0 0;letter-spacing:-.015em}
+  .contact h2 em{font-family:'Allura',cursive;font-style:normal;color:var(--coral);font-size:1.15em;line-height:1}
+  .contact-mail{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;
+    color:var(--plum);display:inline-flex;align-items:center;gap:10px;padding-bottom:4px;
+    border-bottom:1.4px dashed var(--coral)}
+  .contact-mail .arr{color:var(--coral);font-style:normal}
+  .contact-foot{margin-top:80px;padding-top:28px;border-top:1.4px dashed var(--line);
+    display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:18px;
+    font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--plum-soft);font-weight:500}
+  .contact-foot .links{display:flex;gap:28px;flex-wrap:wrap}
+  .contact-foot a:hover{color:var(--coral)}
+
+  /* ===== SEWING MACHINE: thread + needle ===== */
+  /* Thread is an absolutely-positioned SVG spanning the whole document height.
+     The needle is fixed in the viewport — the fabric (page) passes under it. */
+  .thread-layer{position:absolute;top:0;left:calc(var(--sew-x) - 1px);right:auto;width:2px;
+    pointer-events:none;z-index:3}
+  .thread-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  /* white halo so the thread reads on the painted hero AND the cream body */
+  .thread-halo{stroke:rgba(255,255,255,.85);stroke-width:4.4;
+    stroke-dasharray:10 6;stroke-linecap:butt;fill:none}
+  .thread-line{stroke:var(--thread);stroke-width:2.6;
+    stroke-dasharray:10 6;stroke-linecap:butt;fill:none}
+
+  .needle{position:fixed;top:50%;left:var(--sew-x);right:auto;transform:translate(-50%,-50%);
+    z-index:4;pointer-events:none;width:48px;height:192px;transition:opacity .4s ease}
+  .needle svg{width:100%;height:100%;overflow:visible}
+  .needle .foot rect{fill:#b9b1a4}
+  .needle .foot .shine{fill:#fff;opacity:.5}
+  .needle .needle-rod{fill:#cfc8bd}
+  .needle .needle-rod-shine{fill:#fff;opacity:.6}
+  .needle .needle-clamp{fill:#7a7166}
+  .needle .needle-eye{fill:none;stroke:#3a1f2b;stroke-width:.8}
+  .needle .needle-tip{fill:#9c958a}
+  .needle .thread-feed{stroke:var(--thread);stroke-width:1.4;fill:none;stroke-linecap:round}
+
+  /* Bob animation (vertical wiggle) */
+  .bob{animation:bob 240ms ease-in-out infinite;animation-play-state:paused;will-change:transform}
+  body[data-sewing="on"] .bob{animation-play-state:running}
+  @keyframes bob{
+    0%   {transform:translateY(-3px)}
+    50%  {transform:translateY(4px)}
+    100% {transform:translateY(-3px)}
+  }
+
+  /* tiny stitch dots appearing under needle as it sews — purely cosmetic */
+  .needle-base-glow{position:fixed;left:var(--sew-x);top:50%;width:10px;height:10px;
+    transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle, rgba(232,130,107,.55) 0%, transparent 70%);
+    z-index:3;pointer-events:none;filter:blur(2px)}
+
+  @media (max-width:900px){
+    .needle{width:38px;height:152px}
+  }
+  @media (max-width:600px){
+    .thread-layer,.needle,.needle-base-glow{display:none}
+  }
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(12px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.on{opacity:1;transform:none}
+
+  /* Tweaks */
+  body[data-thread="coral"] {--thread:#e8826b}
+  body[data-thread="rose"]  {--thread:#d96382}
+  body[data-thread="navy"]  {--thread:#3a4a6b}
+  body[data-thread="black"] {--thread:#3a1f2b}
+</style>
+</head>
+<body data-sewing="off" data-thread="coral">
+
+<!-- ========== Thread layer (absolutely positioned, doc-tall) ========== -->
+<div class="thread-layer" id="thread-layer">
+  <svg class="thread-svg" id="thread-svg" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <clipPath id="thread-clip"><rect id="thread-rect" x="-2" y="0" width="20" height="0" /></clipPath>
+    </defs>
+    <line class="thread-halo" id="thread-halo" x1="1" y1="0" x2="1" y2="100%" clip-path="url(#thread-clip)" />
+    <line class="thread-line" id="thread-line" x1="1" y1="0" x2="1" y2="100%" clip-path="url(#thread-clip)" />
+  </svg>
+</div>
+
+<!-- glow under needle -->
+<div class="needle-base-glow" aria-hidden="true"></div>
+
+<!-- ========== Needle (fixed in viewport) ========== -->
+<aside class="needle" aria-hidden="true">
+  <svg viewBox="0 0 30 120">
+    <!-- presser foot (light, around the needle base) -->
+    <g class="foot">
+      <rect x="2"  y="76" width="26" height="3"  rx="1.2" />
+      <rect x="4"  y="79" width="22" height="6"  rx="1.5" />
+      <rect x="6"  y="85" width="18" height="2"  rx="1" />
+      <rect x="3"  y="76" width="2"  height="3"  class="shine" />
+    </g>
+    <!-- needle clamp -->
+    <rect class="needle-clamp" x="11" y="14" width="8" height="10" rx="1.5" />
+    <!-- bobbing needle assembly -->
+    <g class="bob">
+      <!-- shaft -->
+      <rect class="needle-rod" x="13.5" y="24" width="3" height="56" rx="0.8" />
+      <rect class="needle-rod-shine" x="13.9" y="24" width="0.7" height="56" />
+      <!-- eye -->
+      <ellipse class="needle-eye" cx="15" cy="68" rx="1.2" ry="2.6" />
+      <!-- point -->
+      <path class="needle-tip" d="M 13.5 80 L 16.5 80 L 15 92 Z" />
+      <!-- thread feeding through eye -->
+      <path class="thread-feed" d="M 6 30 C 10 40, 14 55, 15 67 L 15 80" />
+    </g>
+  </svg>
+</aside>
+
+<nav class="nav">
+  <span class="nav-spacer"></span>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="hero-text">
+    <h1 class="hero-name">Ariel Bukowski</h1>
+    <div class="hero-rule"></div>
+    <div class="hero-tag">
+      <span>MARKETING &amp; BRAND</span>
+      <span class="sep"></span>
+      <span>LOS ANGELES, CALIFORNIA</span>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about" class="about reveal">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-img"><div class="ph">[ portrait — drop image ]</div></div>
+      <div class="about-text">
+        <h1>Marketing, brand, &amp; content. Los Angeles.</h1>
+        <p class="body">I work at Program 11, a boutique marketing agency in LA, across market research, brand identity, content, and design. Background in marketing and psychology from Loyola Marymount.</p>
+        <p class="body">When I'm not at work I'm usually crocheting, taking photos, or up the mountain with the LMU Ski &amp; Board Club.</p>
+        <div class="about-meta">
+          <div><span class="eyebrow k">Based</span><span class="v">Los Angeles</span></div>
+          <div><span class="eyebrow k">Studied</span><span class="v">LMU &middot; Marketing</span></div>
+          <div><span class="eyebrow k">Currently</span><span class="v">Program 11</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="work reveal">
+  <div class="wrap">
+    <div class="work-head">
+      <h2>Selected <em>work</em>.</h2>
+      <span class="count">— Four pieces</span>
+    </div>
+    <div class="work-grid">
+      <a class="card" href="#">
+        <div class="thumb g1"><div class="ph-stripe"></div><div class="ph-label">[ merch + campaign visuals ]</div></div>
+        <div class="meta">
+          <div><h3>Merch for a Cause</h3><div class="tag">Brand &amp; campaign · Human trafficking awareness</div></div>
+          <div class="yr">'25</div>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="thumb g2"><div class="ph-stripe"></div><div class="ph-label">[ brand identity ]</div></div>
+        <div class="meta">
+          <div><h3>Program 11 — Brand Work</h3><div class="tag">Identity &amp; design</div></div>
+          <div class="yr">'25</div>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="thumb g3"><div class="ph-stripe"></div><div class="ph-label">[ research deck ]</div></div>
+        <div class="meta">
+          <div><h3>Market Research</h3><div class="tag">Insights · Program 11</div></div>
+          <div class="yr">'25</div>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="thumb g4"><div class="ph-stripe"></div><div class="ph-label">[ photography ]</div></div>
+        <div class="meta">
+          <div><h3>Personal Photography</h3><div class="tag">35mm &amp; digital</div></div>
+          <div class="yr">'24</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact reveal">
+  <div class="wrap">
+    <div class="contact-row">
+      <div>
+        <span class="eyebrow">Get in touch</span>
+        <h2>Say hello, <em>Ariel.</em></h2>
+      </div>
+      <a class="contact-mail" href="mailto:bukowskiariel@gmail.com">
+        bukowskiariel@gmail.com <span class="arr">→</span>
+      </a>
+    </div>
+    <div class="contact-foot">
+      <div>© 2026 Ariel Bukowski · Los Angeles</div>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/ariel-bukowski-9507861b5/">LinkedIn</a>
+        <a href="tel:5305741451">530.574.1451</a>
+        <a href="assets/Ariel-Bukowski-Resume.pdf" target="_blank">Résumé</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reveal -->
+<script>
+(function(){
+  function setup(){
+    var nodes=document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){nodes.forEach(function(n){n.classList.add('on');});return;}
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('on');});},{threshold:0.05,rootMargin:'0px 0px -3% 0px'});
+    nodes.forEach(function(n){
+      var r=n.getBoundingClientRect();
+      if(r.top<window.innerHeight && r.bottom>0)n.classList.add('on');
+      io.observe(n);
+    });
+    setTimeout(function(){document.querySelectorAll('.reveal:not(.on)').forEach(function(n){n.classList.add('on');});},1500);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
+})();
+</script>
+
+<!-- ========== SEWING ENGINE ==========
+  The thread line is positioned at right: 64px (matches the needle).
+  As the user scrolls, the visible portion of the line grows so it "ends"
+  at exactly the needle's fixed Y in the viewport.
+  When scroll is moving, we toggle data-sewing=on which runs the bob animation. -->
+<script>
+(function(){
+  var threadLayer = document.getElementById('thread-layer');
+  var threadSvg   = document.getElementById('thread-svg');
+  var threadRect  = document.getElementById('thread-rect');
+  var needleY     = function(){ return window.innerHeight / 2; }; // matches CSS top:50%
+  var body        = document.body;
+  var scrollIdleTimer;
+  var lastScroll  = 0;
+  var heroBottom  = 0;
+  var seamEnd     = 0; // doc-Y where the seam finishes (top of contact "hem")
+  var needle      = document.querySelector('.needle');
+  var glow        = document.querySelector('.needle-base-glow');
+
+  function layout(){
+    var hero = document.querySelector('.hero');
+    heroBottom = hero ? (hero.offsetTop + hero.offsetHeight) : 0;
+    var contact = document.querySelector('.contact');
+    seamEnd = contact ? contact.offsetTop : Number.MAX_SAFE_INTEGER;
+    var H = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+    threadLayer.style.top    = heroBottom + 'px';
+    threadLayer.style.height = (H - heroBottom) + 'px';
+    threadSvg.setAttribute('viewBox','0 0 2 ' + (H - heroBottom));
+    update();
+  }
+
+  function update(){
+    var y = window.scrollY || window.pageYOffset;
+    var needleDocY = y + needleY();
+    // clamp the seam so it finishes exactly at the contact hem
+    var endDocY = Math.min(needleDocY, seamEnd);
+    var len = Math.max(0, endDocY - heroBottom);
+    threadRect.setAttribute('height', len);
+    // fade the needle out once the seam is complete (it has passed the hem)
+    if(needle){
+      var done = needleDocY >= seamEnd;
+      needle.style.opacity = done ? 0 : 1;
+      if(glow) glow.style.opacity = done ? 0 : 1;
+    }
+  }
+
+  function onScroll(){
+    update();
+    body.setAttribute('data-sewing','on');
+    clearTimeout(scrollIdleTimer);
+    scrollIdleTimer = setTimeout(function(){
+      body.setAttribute('data-sewing','off');
+    }, 200);
+  }
+
+  var resizeT;
+  function onResize(){
+    clearTimeout(resizeT);
+    resizeT = setTimeout(layout, 80);
+  }
+
+  function init(){
+    layout();
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onResize);
+    window.addEventListener('load', function(){ setTimeout(layout,100); setTimeout(layout,600); });
+    if(window.ResizeObserver){ new ResizeObserver(onResize).observe(document.body); }
+    // bob briefly on load just to demonstrate
+    body.setAttribute('data-sewing','on');
+    setTimeout(function(){ body.setAttribute('data-sewing','off'); }, 900);
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+
+</body>
+</html>
