@@ -17,7 +17,10 @@
     --coral:#e8826b;
     --thread:#e8826b;
     --line:rgba(58,31,43,.16);
-    --sew-x:50%;
+    /* Horizontal position of the sewing seam, measured from the RIGHT edge.
+       Tracks the content's right padding gutter so the seam sits just outside
+       the text column at any width (mobile overrides to a fixed right margin). */
+    --sew-x:max(32px, calc((100% - 1120px) / 2 + 32px));
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--cream);color:var(--plum);
@@ -149,7 +152,7 @@
   /* ===== SEWING MACHINE: thread + needle ===== */
   /* Thread is an absolutely-positioned SVG spanning the whole document height.
      The needle is fixed in the viewport — the fabric (page) passes under it. */
-  .thread-layer{position:absolute;top:0;left:calc(var(--sew-x) - 1px);right:auto;width:2px;
+  .thread-layer{position:absolute;top:0;right:calc(var(--sew-x) - 1px);left:auto;width:2px;
     pointer-events:none;z-index:3}
   .thread-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
   /* white halo so the thread reads on the painted hero AND the cream body */
@@ -158,7 +161,7 @@
   .thread-line{stroke:var(--thread);stroke-width:2.6;
     stroke-dasharray:10 6;stroke-linecap:butt;fill:none}
 
-  .needle{position:fixed;top:50%;left:var(--sew-x);right:auto;transform:translate(-50%,-50%);
+  .needle{position:fixed;top:50%;right:var(--sew-x);left:auto;transform:translate(50%,-50%);
     z-index:4;pointer-events:none;width:48px;height:192px;transition:opacity .4s ease}
   .needle svg{width:100%;height:100%;overflow:visible}
   .needle .foot rect{fill:#b9b1a4}
@@ -180,8 +183,8 @@
   }
 
   /* tiny stitch dots appearing under needle as it sews — purely cosmetic */
-  .needle-base-glow{position:fixed;left:var(--sew-x);top:50%;width:10px;height:10px;
-    transform:translate(-50%,-50%);border-radius:50%;
+  .needle-base-glow{position:fixed;right:var(--sew-x);left:auto;top:50%;width:10px;height:10px;
+    transform:translate(50%,-50%);border-radius:50%;
     background:radial-gradient(circle, rgba(232,130,107,.55) 0%, transparent 70%);
     z-index:3;pointer-events:none;filter:blur(2px)}
 
