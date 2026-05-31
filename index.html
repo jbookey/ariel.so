@@ -191,9 +191,9 @@
   @media (max-width:900px){
     .needle{width:38px;height:152px}
   }
-  /* Below 780px the layout collapses to a single column, so the centered desktop
-     seam would run through the body text. Keep the sewing machine visible but
-     shift the seam into the left margin — it stitches down the binding instead. */
+  /* Below 780px the layout is single-column with only 24px of side padding and no
+     wide outer margin, so the gutter-tracking value isn't needed: pin the seam a
+     fixed 20px from the right edge (keeps the full needle on-screen). */
   @media (max-width:780px){
     :root{--sew-x:20px}
     .needle{width:30px;height:120px}
